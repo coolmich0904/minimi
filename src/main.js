@@ -1,3 +1,4 @@
+
 //Fetch the items from JSON file
 function loadItems() {
     return fetch('data/data.json')
@@ -21,11 +22,37 @@ function createHtmlString(item){
     `;
 }
 
-// main
-loadItems() 
-.then(items => {
-displayItems(items);
-// setEventListeners(items)
+function onButtonClick(event, items) {
+    const dataset =  event.target.dataset;
+    const key = dataset.key;
+    const value = dataset.value;
+    // console.log(event.target.dataset.key);
+    // console.log(event.target.dataset.value);
 
-})
-.catch(console.log);
+    if(key == null || value == null) {
+        return;
+    }
+
+    // displayItems(items.filter(item => item[key] === value));
+    const filtered = items.filtered(item => item[key] === value);
+    console.log(filtered);
+    displayItems(filtered);
+
+}
+
+function setEventListeners(items) {
+    const logo = document.querySelector('.logo');
+    const buttons = document.querySelector('buttons');
+    logo.addEventListener('click', () => displayItems(items));
+    buttons.addEventListener('click', event => onButtonClick(event, items));
+
+}
+
+// main
+loadItems()
+    .then(items => {
+        displayItems(items);
+        setEventListeners(items)
+    })
+    .catch(console.log("Error"));
+
