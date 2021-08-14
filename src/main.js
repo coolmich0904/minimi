@@ -22,27 +22,42 @@ function createHtmlString(item){
     `;
 }
 
+//
+
 function onButtonClick(event, items) {
     const dataset =  event.target.dataset;
     const key = dataset.key;
     const value = dataset.value;
-    // console.log(event.target.dataset.key);
-    // console.log(event.target.dataset.value);
+    console.log(event.target.dataset.key);
+    console.log(event.target.dataset.value);
 
     if(key == null || value == null) {
         return;
     }
 
     // displayItems(items.filter(item => item[key] === value));
-    const filtered = items.filtered(item => item[key] === value);
+    const filtered = items.filter(item => item[key] === value);
     console.log(filtered);
     displayItems(filtered);
 
+    // updateItems(items, key, value);
 }
 
+// Make the items matching {key:value} invisible
+function updateItems(items, key, value) {
+    items.forEach(item => {
+        if(item.dataset[key] === value) {
+            item.classList.remove('invisible');
+        } else {
+            item.classList.addEventListener('invisible');
+        }
+    });
+}
+
+    
 function setEventListeners(items) {
     const logo = document.querySelector('.logo');
-    const buttons = document.querySelector('buttons');
+    const buttons = document.querySelector('.buttons');
     logo.addEventListener('click', () => displayItems(items));
     buttons.addEventListener('click', event => onButtonClick(event, items));
 
@@ -54,5 +69,4 @@ loadItems()
         displayItems(items);
         setEventListeners(items)
     })
-    .catch(console.log("Error"));
-
+    .catch(console.log);
