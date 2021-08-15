@@ -33,6 +33,7 @@
   }
 
   .logo {
+      margin-bottom: var(--base-space);
       cursor: pointer;
       transition: transform var(--animation-duration) ease;
   }
