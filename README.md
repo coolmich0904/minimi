@@ -1,4 +1,6 @@
-# minimi
+# minimi(PWA)
+
+>PWA(Progressive Web App): ngrok, PWABuilder
 
 >Filtering depending on type and color of the clothes
 
